@@ -18,7 +18,6 @@
 ; declare-relation results in problems
 ;(declare-predicate 'part-of 3 :sort '(boolean individual individual))
 (assert
-;'(forall ((x individual) (y individual) (z individual))
  '(forall (x y z)
     (implies
       (and
@@ -37,37 +36,37 @@
 ; declare-function-symbol does not appear to be working as per (outdated?) documentation
 ;(declare-relation 'sum-of 2 :sort '(individual class-of-individuals))
 (assert
-;'(forall ((x individual) (y individual) (alpha class-of-individuals) (t individual))
-   ;(exists ((z individual) (arb-part individual))
- '(forall (x y alpha t)
-    (exists (z arb-part)
-      (iff
-        (sum-of x alpha)
-        (and
+ '(forall (x alpha)
+    (implies
+      (sum-of x alpha)
+      (and
+        (forall (m) 
           (implies
-            (member t alpha)
-            (part-of t x)
-          ) ; alpha is included in the parts of x -> for all t which are members of alpha, t is a part of x
+            (member m alpha)
+            (part-of m x)
+          )
+        )
+        (forall (y)
           (implies
             (part-of y x)
-            (and
-              (member z alpha)
+            (exists (z)
               (and
-                (part-of arb-part z)
-                (part-of arb-part y)
-  ) ) ) ) ) ) )
+                (member z alpha)
+                (forall (p)
+                  (iff
+                    (part-of p y)
+                    (part-of p z)
+  ) ) ) ) ) ) ) ) )              
 :name '1.1.2)
 
 ; AXIOM
 ; Every class which is not null (provided of course that it is of the same type as the field of parts) has a sum:
 (assert
-;'(forall ((alpha class-of-individuals))
-   ;(exists ((arb-member individual) (sum individual))
  '(forall (alpha)
-    (exists (arb-member sum)
+    (exists (arb-member)
       (implies
         (member arb-member alpha)
-        (sum-of sum alpha) ; there exists a sum ('sum') of alpha
+        (exists (sum) (sum-of sum alpha))
   ) ) )
 :name '1.1.3)
 
@@ -78,7 +77,6 @@
 ; LEMMA (from 1.1.1-1.1.3)
 ; The relation 'part of' is reflexive
 (prove
-;'(forall ((x individual))
  '(forall (x)
     (part-of x x)
   )
