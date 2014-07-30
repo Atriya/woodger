@@ -52,8 +52,8 @@
             (exists (z)
               (and
                 (member z alpha)
-                (forall (p)
-                  (iff
+                (exists (p)
+                  (and
                     (part-of p y)
                     (part-of p z)
   ) ) ) ) ) ) ) ) )              

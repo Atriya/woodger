@@ -1,0 +1,24 @@
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+(all x all y all z ((partof(x,y) & partof(y,z)) -> partof(x,z))) # label(1_1_1) # label(axiom).
+(all x all a (sumof(x,a) -> (all m (member(m,a) -> partof(m,x)) & (all y (partof(y,x) -> (exists z (member(z,a) & (exists p (partof(p,y) & partof(p,z)))))))))) # label(1_1_2) # label(definition). 
+(all a (exists m (member(m,a) -> (exists s (sumof(s,a)))))) # label(1_1_3) # label(axiom).
+
+end_of_list.
+
+formulas(goals).
+
+(all x (partof(x,x))) # label(1_1_4) # label(lemma).
+
+end_of_list.
+
