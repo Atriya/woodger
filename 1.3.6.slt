@@ -1,0 +1,187 @@
+
+(:DESCRIPTIONS
+ ((:X
+   55
+   :Y
+   26
+   :ID
+   1
+   :NAME
+   "1.2.1"
+   :FORMULA
+   "(forall (x y)
+    (if
+      (before-in-time x y)
+      (not (before-in-time y x))
+  ) )"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   1435
+   :Y
+   91
+   :ID
+   5
+   :NAME
+   "1.3.3"
+   :FORMULA
+   "(forall (x y z)
+    (if
+      (and
+        (and
+          (before-in-time x y)
+          (part-of y z)
+        )
+        (member z mom)
+      )
+      (before-in-time x z)
+  ) )"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   1686
+   :Y
+   23
+   :ID
+   4
+   :NAME
+   "1.3.1"
+   :FORMULA
+   "(forall (u v m)
+    (if
+      (member m mom)
+      (if
+        (and
+          (part-of u m)
+          (part-of v m)
+        )
+        (not (or
+          (before-in-time u v)
+          (before-in-time v u)
+  ) ) ) ) )"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   127
+   :Y
+   105
+   :ID
+   2
+   :NAME
+   "1.2.3"
+   :FORMULA
+   "(forall (x y i)
+      (if
+        (not (exists (p)
+          (and
+            (part-of p x)
+            (before-in-time y p)
+          )
+        ) )
+        (if
+          (before-in-time y i)
+          (before-in-time x i)
+  ) ) )"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   223
+   :Y
+   188
+   :ID
+   3
+   :NAME
+   "1.2.4"
+   :FORMULA
+   "(forall (x y i)
+      (if
+        (not (exists (p)
+          (and
+            (part-of p x)
+            (before-in-time p y)
+        ) ) )
+        (if
+          (before-in-time i y)
+          (before-in-time i x)
+  ) ) )"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   1188
+   :Y
+   187
+   :ID
+   6
+   :NAME
+   "1.3.4"
+   :FORMULA
+   "(forall (x y z)
+    (if
+      (and
+        (and
+          (part-of x y)
+          (before-in-time x z)
+        )
+        (member y mom)
+      )
+      (before-in-time y z)
+  ) )"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   571
+   :Y
+   954
+   :ID
+   8
+   :NAME
+   "dummy"
+   :FORMULA
+   "(forall x (dummy x))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   451
+   :Y
+   496
+   :ID
+   7
+   :NAME
+   "1.3.6"
+   :FORMULA
+   "(forall (x y z)
+    (if
+      (and
+        (and
+          (not (or (before-in-time x y) (before-in-time y x)))
+          (and (member x mom) (member y mom))
+        )
+        (and
+          (not (or (before-in-time y z) (before-in-time z y)))
+          (and (member y mom) (member z mom))
+        )
+      )
+      (not (or (before-in-time x z) (before-in-time z x)))
+  ) )"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY))
+ :STRUCTURES
+ ((:CONCLUSION 1 :PREMISES NIL)
+  (:CONCLUSION 5 :PREMISES NIL)
+  (:CONCLUSION 4 :PREMISES NIL)
+  (:CONCLUSION 2 :PREMISES NIL)
+  (:CONCLUSION 3 :PREMISES NIL)
+  (:CONCLUSION 6 :PREMISES NIL)
+  (:CONCLUSION 8 :PREMISES NIL)
+  (:CONCLUSION 7 :PREMISES (6 1 2 4 5 3)))
+ :INTERFACE
+ (:X
+  0
+  :Y
+  0
+  :WIDTH
+  2560
+  :HEIGHT
+  1392
+  :PROOF-SYSTEM
+  LOGIC::FIRST-ORDER-LOGIC))

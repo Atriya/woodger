@@ -44,8 +44,7 @@
           (implies
             (member m alpha)
             (part-of m x)
-          )
-        )
+        ) )
         (forall (y)
           (implies
             (part-of y x)
