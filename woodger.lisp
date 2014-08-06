@@ -2,38 +2,22 @@
 ; Atriya Sen
 ; RAIR Lab, RPI
 
-; -------------------------------------------------------------------------------------------------------------------
-
-; Woodger's 'types'. May require ATP supporting type theory. Using SNARK's 'sorts' for now.
 ;(declare-sort 'individual)
 ;(declare-sort 'class-of-individuals)
 ;(declare-sorts-incompatible 'individual 'class-of-individuals)
 
-; -------------------------------------------------------------------------------------------------------------------
-
-; 1.1 - AXIOMS INVOLVING 'part-of'
-
-; AXIOM
-; The predicate symbol 'part of' is transitive:
-; declare-relation results in problems
-;(declare-predicate 'part-of 3 :sort '(boolean individual individual))
+;(declare-predicate 'P 3 :sort '(boolean individual individual))
 (assert
  '(forall (x y z)
     (implies
       (and
-        (part-of x y)
-        (part-of y z)
+        (P x y)
+        (P y z)
       )
-      (part-of x z)
+      (P x z)
   ) )
-:name '1.1.1)
+:name '1.1.1-axiom)
 
-; Temporary to implementing set theory (NBG?)
-;(declare-relation 'member 2 :sort '(individual class-of-individuals))
-
-; DEFINITION: The sum of a class of parts
-; x is the sum of alpha if alpha is contained in the parts of x, and if when y is any part of x there is always a z belonging to alpha having parts in common with the parts of y:
-; declare-function-symbol does not appear to be working as per (outdated?) documentation
 ;(declare-relation 'sum-of 2 :sort '(individual class-of-individuals))
 (assert
  '(forall (x alpha)
@@ -43,23 +27,21 @@
         (forall (m) 
           (implies
             (member m alpha)
-            (part-of m x)
+            (P m x)
         ) )
         (forall (y)
           (implies
-            (part-of y x)
+            (P y x)
             (exists (z)
               (and
                 (member z alpha)
                 (exists (p)
                   (and
-                    (part-of p y)
-                    (part-of p z)
+                    (P p y)
+                    (P p z)
   ) ) ) ) ) ) ) ) )              
-:name '1.1.2)
+:name '1.1.2-definition)
 
-; AXIOM
-; Every class which is not null (provided of course that it is of the same type as the field of parts) has a sum:
 (assert
  '(forall (alpha)
     (exists (arb-member)
@@ -67,74 +49,54 @@
         (member arb-member alpha)
         (exists (sum) (sum-of sum alpha))
   ) ) )
-:name '1.1.3)
+:name '1.1.3-axiom)
 
-; -------------------------------------------------------------------------------------------------------------------
-
-; LEMMAS FROM 1.1.1-1.1.3 :-
-
-; LEMMA (from 1.1.1-1.1.3)
-; The relation 'part of' is reflexive
 (prove
  '(forall (x)
-    (part-of x x)
+    (P x x)
   )
-:name '1.1.4)
+:name '1.1.4-lemma)
 
-; LEMMA (from 1.1.1-1.1.3)
-; Only the logical product of 'part of' with diversity will be asymmetrical
 (prove
  '(forall (x y)
     (implies
       (and
-        (part-of x y)
+        (P x y)
         (not (= x y))
       )
-      (not (part-of y x))
+      (not (P y x))
   ) )
-:name '1.1.5)
+:name '1.1.5-lemma)
 
-; LEMMA (from 1.1.1-1.1.3)
-; The logical product of 'part-of' with its converse is included in identity
 (prove
  '(forall (x y)
     (implies
       (and
-        (part-of x y)
-        (part-of y x) 
+        (P x y)
+        (P y x) 
       )
       (= x y)
   ) )
-:name '1.1.6)
+:name '1.1.6-lemma)
 
-; LEMMA (from 1.1.1-1.1.3)
-; Iff xPy then the parts of x are included in the parts of y
 (prove
  '(forall (x y p)
     (iff
-      (part-of x y)
+      (P x y)
       (implies
-        (part-of p x)
-        (part-of p y)
+        (P p x)
+        (P p y)
   ) ) )
-:name '1.1.7)
+:name '1.1.7-lemma)
 
-; -------------------------------------------------------------------------------------------------------------------
-
-; 1.2 - AXIOMS INVOLVING 'before-in-time'
-
-; AXIOM
-; The relation 'before in time' is asymmetrical
 (assert
  '(forall (x y)
     (implies
-      (before-in-time x y)
-      (not (before-in-time y x))
+      (T x y)
+      (not (T y x))
   ) )
-:name '1.2.1)
+:name '1.2.1-axiom)
 
-; AXIOM
-; @todo
 (assert
  '(forall (alpha beta x y) (exists (s1 s2 m1 m2) 
     (iff
@@ -143,7 +105,7 @@
           (sum-of s1 alpha)
           (sum-of s2 beta)
         )
-        (before-in-time s1 s2)
+        (T s1 s2)
       )
       (and
         (and
@@ -155,78 +117,61 @@
             (member x alpha)
             (member y beta)
           )
-          (before-in-time x y)
+          (T x y)
   ) ) ) ) )
-:name '1.2.2)
+:name '1.2.2-axiom)
 
-; AXIOM
-; @todo
 (assert
  '(forall (x y i)
     (not (exists (p)
       (implies
         (and
-          (part-of p x)
-          (before-in-time y p)
+          (P p x)
+          (T y p)
         )
         (implies
-          (before-in-time y i)
-          (before-in-time x i)
+          (T y i)
+          (T x i)
   ) ) ) ) )
-:name '1.2.3)
+:name '1.2.3-axiom)
 
-; AXIOM
-; @todo
 (assert
  '(forall (x y i)
     (not (exists (p)
       (implies
         (and
-          (part-of p x)
-          (before-in-time p y)
+          (P p x)
+          (T p y)
         )
         (implies
-          (before-in-time i y)
-          (before-in-time i x)
+          (T i y)
+          (T i x)
   ) ) ) ) )
-:name '1.2.4)
+:name '1.2.4-axiom)
 
-; -------------------------------------------------------------------------------------------------------------------
-
-; 1.3 - AXIOMS INVOLVING THE CLASS OF MOMENTARY THINGS
-
-; DEFINITION
-; @todo
 (assert
  '(forall (u v) (exists (m) (not (exists (p)
     (iff
       (member m mom)
       (implies
         (and
-          (part-of u m)
-          (part-of v m)
+          (P u m)
+          (P v m)
         )
         (or
-          (before-in-time u v)
-          (before-in-time v u)
+          (T u v)
+          (T v u)
   ) ) ) ) ) ) )
-:name '1.3.1)
+:name '1.3.1-definition)
 
-; AXIOM
-; Everything has momentary parts
 (assert
  '(forall (x)
     (exists (p)
       (and
-        (part-of p x)
+        (P p x)
         (member p mom)
   ) ) )
-:name '1.3.2)
+:name '1.3.2-axiom)
 
-; -------------------------------------------------------------------------------------------------------------------
-
-; 1.4 - AXIOMS INVOLVING THE CLASS OF ALL ORGANIZED ENTITIES
-
-; -------------------------------------------------------------------------------------------------------------------
 ; [1] J. H. Woodger, The Axiomatic Method in Biology (1937). Cambridge, U.K.: Cambridge University Press.
 ; [2] http://www.ai.sri.com/~stickel/snark.html
