@@ -1,0 +1,133 @@
+
+(:DESCRIPTIONS
+ ((:X
+   227
+   :Y
+   432
+   :ID
+   4
+   :NAME
+   "1.21-lemma"
+   :FORMULA
+   "(forall (x alpha)
+    (if
+      (and
+        (member x alpha)
+        (not (exists (z)
+          (and
+            (member z alpha)
+            (not (= z x))
+      ) )) )
+      (sum-of x alpha)
+  ) )"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   25
+   :Y
+   241
+   :ID
+   2
+   :NAME
+   "1.12-axiom"
+   :FORMULA
+   "(forall (x y alpha)
+    (if
+      (and
+        (member x alpha)
+        (and
+          (not (exists (z)
+            (and
+              (member z alpha)
+              (not (= z x))
+          )) )
+          (sum-of y alpha)
+      ) )
+      (= x y)
+  ))"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   799
+   :Y
+   241
+   :ID
+   3
+   :NAME
+   "1.1.3-axiom"
+   :FORMULA
+   "(forall (alpha)
+    (if
+      (exists (p)
+        (member p alpha)
+      )
+      (exists (q)
+        (sum-of q alpha)
+  ) ) )"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   944
+   :Y
+   432
+   :ID
+   1
+   :NAME
+   "1.1-definition"
+   :FORMULA
+   "(forall (y alpha)
+    (if
+      (sum-of y alpha)
+      (and
+        (forall (p)
+          (if
+            (member p alpha)
+            (part-of p y)
+        ) )
+        (forall (z)
+          (if
+            (part-of z y)
+            (not (exists (q)
+              (and
+                (exists (r)
+                  (and
+                    (member r alpha)
+                    (part-of q r)
+                ) )
+                (part-of q z)
+  ) ) ) ) ) )) )"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   782
+   :Y
+   622
+   :ID
+   5
+   :NAME
+   "1.22-lemma"
+   :FORMULA
+   "(forall (x y)
+    (if
+      (= x y)
+      (part-of x y)
+  ) )"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY))
+ :STRUCTURES
+ ((:CONCLUSION 4 :PREMISES (3 2))
+  (:CONCLUSION 2 :PREMISES NIL)
+  (:CONCLUSION 3 :PREMISES NIL)
+  (:CONCLUSION 1 :PREMISES NIL)
+  (:CONCLUSION 5 :PREMISES (4 1)))
+ :INTERFACE
+ (:X
+  9
+  :Y
+  0
+  :WIDTH
+  1920
+  :HEIGHT
+  1032
+  :PROOF-SYSTEM
+  LOGIC::FIRST-ORDER-LOGIC))

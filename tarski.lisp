@@ -5,97 +5,97 @@
 ; Here, Tarski is indebted to Leśniewski's Mereology [4].
 
 (assert
- '(forall (X Y)
+;;{{{
+ '(forall (y alpha)
     (implies
-      (proper-part X Y)
+      (sum-of y alpha)
       (and
-        (part-of X Y)
-        (not (= X Y))
-      )
-    )
-  )
-:name 'definition-I)
-
-(assert
- '(forall (X Y)
-    (implies
-      (disjoint X Y)
-      (not (exists (Z)
-        (and
-          (part-of Z X)
-          (part-of Z Y)
-        )  
-      ))
-    )
-  )
-:name 'definition-II)
-
-(assert
- '(forall (X alpha)
-    (implies
-      (sum-of alpha X)
-      (and
-        (forall (Y)
+        (forall (p)
           (implies
-            (member Y alpha)
-            (part-of Y X)
-          )
-        )
-        (not (exists (Z)
-          (and
-            (part-of Z X)
-            (forall (W)
-              (implies
-                (member W alpha)
-                (disjoint Z W)
-              )
-            )
-          )
-        ))
-      )
-    )
-  )
-:name 'definition-III)
+            (member p alpha)
+            (part-of p y)
+        ) )
+        (forall (z)
+          (implies
+            (part-of z y)
+            (not (exists (q)
+              (and
+                (exists (r)
+                  (and
+                    (member r alpha)
+                    (part-of q r)
+                ) )
+                (part-of q z)
+  ) ) ) ) ) )) )
+;;}}}
+:name '1.1-definition)
 
 (assert
- '(forall (X Y Z)
+;;{{{
+ '(forall (x y z)
     (implies
       (and
-        (part-of X Y)
-        (part-of Y Z)
+        (part-of x y)
+        (part-of y z)
       )
-      (part-of X Z)
-    )
-  )
-:name 'axiom-I)
+      (part-of x z)
+  ) )
+;;}}}
+:name '1.11-axiom)
 
 (assert
- '(forall (alpha)
-    (exists (X)
+ '(forall (x y alpha)
+    (implies
       (and
-        (implies
-          (exists (Y) (member Y alpha))
-          (sum-of alpha X)
-        )
-        (not (exists (Z)
-          (and
-            (implies
-              (exists (W) (member W alpha))
-              (sum-of alpha Z)
-            )
-            (not (= X Z))
-          )
-        ))
+        (member x alpha)
+        (and
+          (not (exists (z)
+            (and
+              (member z alpha)
+              (not (= z x))
+          )) )
+          (sum-of y alpha)
+      ) )
+      (= x y)
+  ) )
+:name '1.12-axiom)
+
+(assert
+;;{{{
+ '(forall (alpha)
+    (implies
+      (exists (p)
+        (member p alpha)
       )
-    )
-  ) 
-:name 'axiom-II)
+      (exists (q)
+        (sum-of q alpha)
+  ) ) )
+;;}}}
+:name '1.13-axiom)
+
+(assert
+ '(forall (x alpha)
+    (implies
+      (and
+        (member x alpha)
+        (not (exists (z)
+          (and
+            (member z alpha)
+            (not (= z x))
+      ) )) )
+      (sum-of x alpha)
+  ) )
+:name '1.21-lemma) ; proved from {1.12, 1.13} without 1.1.
 
 (prove
- '(forall (X)
-    (part-of X X)
-  )
-:name 'lemma-I)
+ '(forall (x y)
+    (implies
+      (= x y)
+      (part-of x y)
+  ) )
+:name '1.22-lemma) ; should be provable from {1.21, 1.1}. Tweak 1.1.
+
+; Theorems 1.23-1.27 are also deducible, among others.
 
 ; [1]
 ; [2]
