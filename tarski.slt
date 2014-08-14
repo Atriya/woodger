@@ -1,31 +1,9 @@
 
 (:DESCRIPTIONS
  ((:X
-   227
+   64
    :Y
-   432
-   :ID
-   4
-   :NAME
-   "1.21-lemma"
-   :FORMULA
-   "(forall (x alpha)
-    (if
-      (and
-        (member x alpha)
-        (not (exists (z)
-          (and
-            (member z alpha)
-            (not (= z x))
-      ) )) )
-      (sum-of x alpha)
-  ) )"
-   :JUSTIFICATION
-   LOGIC::FOL-PROVABILITY)
-  (:X
-   25
-   :Y
-   241
+   11
    :ID
    2
    :NAME
@@ -48,9 +26,37 @@
    :JUSTIFICATION
    LOGIC::ASSUME)
   (:X
-   799
+   225
    :Y
-   241
+   195
+   :ID
+   4
+   :NAME
+   "1.21-lemma"
+   :FORMULA
+   "(forall (x y alpha)
+    (if
+      (and
+        (and
+          (member x alpha)
+          (not (exists (z)
+            (and
+              (member z alpha)
+              (not (= x z))
+            )
+          ))
+        )
+        (sum-of y alpha)
+      )
+      (= x y)
+    )
+  )"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   838
+   :Y
+   11
    :ID
    3
    :NAME
@@ -67,43 +73,25 @@
    :JUSTIFICATION
    LOGIC::ASSUME)
   (:X
-   944
+   843
    :Y
-   432
-   :ID
-   1
-   :NAME
-   "1.1-definition"
-   :FORMULA
-   "(forall (y alpha)
-    (if
-      (sum-of y alpha)
-      (and
-        (forall (p)
-          (if
-            (member p alpha)
-            (part-of p y)
-        ) )
-        (forall (z)
-          (if
-            (part-of z y)
-            (not (exists (q)
-              (and
-                (exists (r)
-                  (and
-                    (member r alpha)
-                    (part-of q r)
-                ) )
-                (part-of q z)
-  ) ) ) ) ) )) )"
-   :JUSTIFICATION
-   LOGIC::ASSUME)
-  (:X
-   782
-   :Y
-   622
+   385
    :ID
    5
+   :NAME
+   "1.22-lemma-alt"
+   :FORMULA
+   "(forall (x)
+    (part-of x x)
+  )"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   821
+   :Y
+   513
+   :ID
+   6
    :NAME
    "1.22-lemma"
    :FORMULA
@@ -113,20 +101,61 @@
       (part-of x y)
   ) )"
    :JUSTIFICATION
-   LOGIC::FOL-PROVABILITY))
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   988
+   :Y
+   195
+   :ID
+   1
+   :NAME
+   "1.1-definition"
+   :FORMULA
+   "(forall (y alpha)
+    (iff
+      (sum-of y alpha)
+      (and
+        (forall (p)
+          (if
+            (member p alpha)
+            (part-of p y)
+          )
+        )
+        (forall (z)
+          (if
+            (part-of z y)
+            (exists (q)
+              (and
+                (exists (r)
+                  (and
+                    (member r alpha)
+                    (part-of q r)
+                  )
+                )
+                (part-of q z)
+              )
+            )
+          )
+        )
+      )
+    )
+  )"
+   :JUSTIFICATION
+   LOGIC::ASSUME))
  :STRUCTURES
- ((:CONCLUSION 4 :PREMISES (3 2))
-  (:CONCLUSION 2 :PREMISES NIL)
+ ((:CONCLUSION 2 :PREMISES NIL)
+  (:CONCLUSION 4 :PREMISES (3 2))
   (:CONCLUSION 3 :PREMISES NIL)
-  (:CONCLUSION 1 :PREMISES NIL)
-  (:CONCLUSION 5 :PREMISES (4 1)))
+  (:CONCLUSION 5 :PREMISES (4 1))
+  (:CONCLUSION 6 :PREMISES (5))
+  (:CONCLUSION 1 :PREMISES NIL))
  :INTERFACE
  (:X
-  9
+  -121
   :Y
-  0
+  12
   :WIDTH
-  1920
+  2087
   :HEIGHT
   1032
   :PROOF-SYSTEM

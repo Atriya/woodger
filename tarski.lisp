@@ -7,26 +7,34 @@
 (assert
 ;;{{{
  '(forall (y alpha)
-    (implies
+    (iff
       (sum-of y alpha)
       (and
         (forall (p)
           (implies
             (member p alpha)
             (part-of p y)
-        ) )
+          )
+        )
         (forall (z)
           (implies
             (part-of z y)
-            (not (exists (q)
+            (exists (q)
               (and
                 (exists (r)
                   (and
                     (member r alpha)
                     (part-of q r)
-                ) )
+                  )
+                )
                 (part-of q z)
-  ) ) ) ) ) )) )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
 ;;}}}
 :name '1.1-definition)
 
@@ -44,6 +52,7 @@
 :name '1.11-axiom)
 
 (assert
+;;{{{
  '(forall (x y alpha)
     (implies
       (and
@@ -58,6 +67,7 @@
       ) )
       (= x y)
   ) )
+;;}}}
 :name '1.12-axiom)
 
 (assert
@@ -74,28 +84,58 @@
 :name '1.13-axiom)
 
 (assert
- '(forall (x alpha)
+;;{{{
+ '(forall (x y alpha)
     (implies
       (and
-        (member x alpha)
-        (not (exists (z)
-          (and
-            (member z alpha)
-            (not (= z x))
-      ) )) )
-      (sum-of x alpha)
-  ) )
-:name '1.21-lemma) ; proved from {1.12, 1.13} without 1.1.
+        (and
+          (member x alpha)
+          (not (exists (z)
+            (and
+              (member z alpha)
+              (not (= x z))
+            )
+          ))
+        )
+        (sum-of y alpha)
+      )
+      (= x y)
+    )
+  )
+;;}}}
+:name '1.21-lemma) ; Proved from {1.12, 1.13} (without 1.1), as stated by Tarski.
 
 (prove
+ '(forall (x)
+    (part-of x x)
+  )
+:name '1.22-lemma-alt)
+
+(assert
+;;{{{
  '(forall (x y)
     (implies
       (= x y)
       (part-of x y)
   ) )
-:name '1.22-lemma) ; should be provable from {1.21, 1.1}. Tweak 1.1.
+;;}}}
+:name '1.22-lemma) ; should be provable from {1.21, 1.1}.
 
-; Theorems 1.23-1.27 are also deducible, among others.
+(prove
+;;{{{
+ '(forall (x y)
+    (implies
+      (and
+        (part-of x y)
+        (part-of y x)
+      )
+      (= x y)
+    )
+  )
+;;}}}
+:name '1.23-lemma) ; should be provable from {1.11, 1.22, 1.1, 1.12}.
+
+; Theorems 1.24-1.27 are also deducible, among others.
 
 ; [1]
 ; [2]
