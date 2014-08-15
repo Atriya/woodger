@@ -1,8 +1,7 @@
 ; Tarski's Axioms of Mereology, in SNARK [1].
 
-; Taken from the English translation [2] (from the French) of [3].
-; The translation is due to Joseph Henry Woodger.
-; Here, Tarski is indebted to Leśniewski's Mereology [4].
+; Taken from Appendix E of Woodger [2].
+; Here, Tarski is indebted to Leśniewski's Mereology [3].
 
 (assert
 ;;{{{
@@ -111,7 +110,7 @@
   )
 :name '1.22-lemma-alt)
 
-(assert
+(prove
 ;;{{{
  '(forall (x y)
     (implies
@@ -140,4 +139,3 @@
 ; [1]
 ; [2]
 ; [3]
-; [4]

@@ -73,20 +73,6 @@
    :JUSTIFICATION
    LOGIC::ASSUME)
   (:X
-   843
-   :Y
-   385
-   :ID
-   5
-   :NAME
-   "1.22-lemma-alt"
-   :FORMULA
-   "(forall (x)
-    (part-of x x)
-  )"
-   :JUSTIFICATION
-   LOGIC::FOL-PROVABILITY)
-  (:X
    821
    :Y
    513
@@ -141,19 +127,33 @@
     )
   )"
    :JUSTIFICATION
-   LOGIC::ASSUME))
+   LOGIC::ASSUME)
+  (:X
+   843
+   :Y
+   385
+   :ID
+   5
+   :NAME
+   "1.22-lemma-alt"
+   :FORMULA
+   "(forall (x)
+    (part-of x x)
+  )"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY))
  :STRUCTURES
  ((:CONCLUSION 2 :PREMISES NIL)
   (:CONCLUSION 4 :PREMISES (3 2))
   (:CONCLUSION 3 :PREMISES NIL)
-  (:CONCLUSION 5 :PREMISES (4 1))
   (:CONCLUSION 6 :PREMISES (5))
-  (:CONCLUSION 1 :PREMISES NIL))
+  (:CONCLUSION 1 :PREMISES NIL)
+  (:CONCLUSION 5 :PREMISES (4 1)))
  :INTERFACE
  (:X
-  -121
+  4
   :Y
-  12
+  174
   :WIDTH
   2087
   :HEIGHT
