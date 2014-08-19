@@ -35,6 +35,7 @@
 :name 'Definition-II)
 
 ; Maybe this requires types / sorts?
+; But remember, the TPTP types are int, char, etc...
 (assert
 ;;{{{
  '(forall (X alpha)
