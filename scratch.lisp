@@ -4,6 +4,7 @@
 (use-resolution)
 (use-paramodulation)
 
+; A tentative attempt at building an imitation of a higher-order function.
 (assert
  '(forall (s x)
     (iff

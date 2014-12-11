@@ -1,0 +1,377 @@
+
+(:DESCRIPTIONS
+ ((:X
+   -2
+   :Y
+   0
+   :ID
+   10
+   :NAME
+   "1.1"
+   :FORMULA
+   "(and
+(forall (y)
+	(iff
+		(sum y alpha)
+		(and
+			(forall (w) (if (member w alpha) (part w y)))
+			(forall (z)
+				(if
+					(part z y)
+					(exists (c)
+						(and
+							(part c z)
+							(exists (m)
+								(and (member m alpha) (part c m))
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+)
+(forall (x w) (iff (member w alpha) (= w x)))
+)"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   10
+   :Y
+   111
+   :ID
+   11
+   :NAME
+   ""
+   :FORMULA
+   "(and
+	(iff
+		(sum x alpha)
+		(and
+			(forall (w) (if (member w alpha) (part w x)))
+			(forall (z)
+				(if
+					(part z x)
+					(exists (c)
+						(and
+							(part c z)
+							(exists (m)
+								(and (member m alpha) (part c m))
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(forall (x w) (iff (member w alpha) (= w x)))
+)"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   1472
+   :Y
+   0
+   :ID
+   7
+   :NAME
+   "1.1"
+   :FORMULA
+   "(forall (y)
+	(iff
+		(sum y alpha)
+		(and
+			(forall (w) (if (member w alpha) (part w y)))
+			(forall (z)
+				(if
+					(part z y)
+					(exists (c)
+						(and
+							(part c z)
+							(exists (m)
+								(and (member m alpha) (part c m))
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+)"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   1493
+   :Y
+   133
+   :ID
+   8
+   :NAME
+   ""
+   :FORMULA
+   "
+	(iff
+		(sum x alpha)
+		(and
+			(forall (w) (if (member w alpha) (part w x)))
+			(forall (z)
+				(if
+					(part z x)
+					(exists (c)
+						(and
+							(part c z)
+							(exists (m)
+								(and (member m alpha) (part c m))
+							)
+						)
+					)
+				)
+			)
+		)
+	)"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   1497
+   :Y
+   290
+   :ID
+   9
+   :NAME
+   ""
+   :FORMULA
+   "
+	(iff
+		(sum x alpha)
+		(and
+			(forall (x) (if (member x alpha) (part x x)))
+			(forall (z)
+				(if
+					(part z x)
+					(exists (c)
+						(and
+							(part c z)
+							(exists (m)
+								(and (member m alpha) (part c m))
+							)
+						)
+					)
+				)
+			)
+		)
+	)"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   1790
+   :Y
+   463
+   :ID
+   4
+   :NAME
+   ""
+   :FORMULA
+   "(forall(x) (if (member x alpha) (part x x)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   2100
+   :Y
+   372
+   :ID
+   5
+   :NAME
+   "1.21"
+   :FORMULA
+   "(forall (x) (and (sum x alpha) (not (exists (y) (and (sum y alpha) (not (= x y)))))))"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   1783
+   :Y
+   617
+   :ID
+   1
+   :NAME
+   ""
+   :FORMULA
+   "(if (forall (x) (member x alpha)) (forall (x) (part x x)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   2325
+   :Y
+   193
+   :ID
+   6
+   :NAME
+   "alpha = {x}"
+   :FORMULA
+   "(forall (w) (iff (member w alpha) (= w x)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   2511
+   :Y
+   0
+   :ID
+   3
+   :NAME
+   "FA x alpha = {x}"
+   :FORMULA
+   "(forall (x w) (iff (member w alpha) (= w x)))"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   2106
+   :Y
+   691
+   :ID
+   2
+   :NAME
+   "1.22"
+   :FORMULA
+   "(forall (x) (part x x))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   17
+   :Y
+   243
+   :ID
+   12
+   :NAME
+   ""
+   :FORMULA
+   "(and
+	(iff
+		(sum x alpha)
+		(and
+			(forall (w) (if (member w alpha) (part w x)))
+			(forall (z)
+				(if
+					(part z x)
+					(exists (c)
+						(and
+							(part c z)
+							(exists (m)
+								(and (member m alpha) (part c m))
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+		(forall (w) (iff (member w alpha) (= w x)))
+)"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   146
+   :Y
+   368
+   :ID
+   13
+   :NAME
+   ""
+   :FORMULA
+   "
+	(iff
+		(sum x alpha)
+		(and
+			(forall (x) (if (member x alpha) (part x x)))
+			(forall (z)
+				(if
+					(part z x)
+					(exists (c)
+						(and
+							(part c z)
+							(exists (m)
+								(and (member m alpha) (part c m))
+							)
+						)
+					)
+				)
+			)
+		)
+	)"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   1048
+   :Y
+   368
+   :ID
+   14
+   :NAME
+   "1.21"
+   :FORMULA
+   "(forall (x) (and (sum x alpha) (not (exists (y) (and (sum y alpha) (not (= x y)))))))"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   771
+   :Y
+   572
+   :ID
+   15
+   :NAME
+   ""
+   :FORMULA
+   "(forall(x) (if (member x alpha) (part x x)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   764
+   :Y
+   686
+   :ID
+   16
+   :NAME
+   ""
+   :FORMULA
+   "(if (forall (x) (member x alpha)) (forall (x) (part x x)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   504
+   :Y
+   837
+   :ID
+   17
+   :NAME
+   "1.22"
+   :FORMULA
+   "(forall (x) (part x x))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY))
+ :STRUCTURES
+ ((:CONCLUSION 10 :PREMISES NIL)
+  (:CONCLUSION 11 :PREMISES (10))
+  (:CONCLUSION 7 :PREMISES NIL)
+  (:CONCLUSION 8 :PREMISES (7))
+  (:CONCLUSION 9 :PREMISES (6 8))
+  (:CONCLUSION 4 :PREMISES (9 5))
+  (:CONCLUSION 5 :PREMISES NIL)
+  (:CONCLUSION 1 :PREMISES (4))
+  (:CONCLUSION 6 :PREMISES (3))
+  (:CONCLUSION 3 :PREMISES NIL)
+  (:CONCLUSION 2 :PREMISES (3 1))
+  (:CONCLUSION 12 :PREMISES (11))
+  (:CONCLUSION 13 :PREMISES (12))
+  (:CONCLUSION 14 :PREMISES NIL)
+  (:CONCLUSION 15 :PREMISES (14 13))
+  (:CONCLUSION 16 :PREMISES (15))
+  (:CONCLUSION 17 :PREMISES (11 16)))
+ :INTERFACE
+ (:X
+  14
+  :Y
+  0
+  :WIDTH
+  1383
+  :HEIGHT
+  836
+  :PROOF-SYSTEM
+  LOGIC::FIRST-ORDER-LOGIC))

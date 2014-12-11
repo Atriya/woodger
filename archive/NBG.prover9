@@ -1,0 +1,54 @@
+% NBG [1] in Prover9 [2]
+% Atriya Sen
+% RAIR Lab, RPI
+
+set(prolog_style_variables).
+
+formulas(assumptions).
+(all X all Y (subclass(X,Y) <-> (all U (member(U,X) -> member(U,Y))))) # label(subclass_defn) # label(axiom).
+(all X subclass(X,universal_class)) # label(class_elements_are_sets) # label(axiom).
+(all X all Y (X = Y <-> subclass(X,Y) & subclass(Y,X))) # label(extensionality) # label(axiom).
+(all U all X all Y (member(U,unordered_pair(X,Y)) <-> member(U,universal_class) & (U = X | U = Y))) # label(unordered_pair_defn) # label(axiom).
+(all X all Y member(unordered_pair(X,Y),universal_class)) # label(unordered_pair) # label(axiom).
+(all X singleton(X) = unordered_pair(X,X)) # label(singleton_set_defn) # label(axiom).
+(all X all Y ordered_pair(X,Y) = unordered_pair(singleton(X),unordered_pair(X,singleton(Y)))) # label(ordered_pair_defn) # label(axiom).
+(all U all V all X all Y (member(ordered_pair(U,V),cross_product(X,Y)) <-> member(U,X) & member(V,Y))) # label(cross_product_defn) # label(axiom).
+(all X all Y (member(X,universal_class) & member(Y,universal_class) -> first(ordered_pair(X,Y)) = X & second(ordered_pair(X,Y)) = Y)) # label(first_second) # label(axiom).
+(all X all Y all Z (member(Z,cross_product(X,Y)) -> Z = ordered_pair(first(Z),second(Z)))) # label(cross_product) # label(axiom).
+(all X all Y (member(ordered_pair(X,Y),element_relation) <-> member(Y,universal_class) & member(X,Y))) # label(element_relation_defn) # label(axiom).
+subclass(element_relation,cross_product(universal_class,universal_class)) # label(element_relation) # label(axiom).
+(all X all Y all Z (member(Z,intersection(X,Y)) <-> member(Z,X) & member(Z,Y))) # label(intersection) # label(axiom).
+(all X all Z (member(Z,complement(X)) <-> member(Z,universal_class) & -member(Z,X))) # label(complement) # label(axiom).
+(all X all XR all Y restrict(XR,X,Y) = intersection(XR,cross_product(X,Y))) # label(restrict_defn) # label(axiom).
+(all X -member(X,null_class)) # label(null_class_defn) # label(axiom).
+(all X all Z (member(Z,domain_of(X)) <-> member(Z,universal_class) & restrict(X,singleton(Z),universal_class) != null_class)) # label(domain_of) # label(axiom).
+(all X all U all V all W (member(ordered_pair(ordered_pair(U,V),W),rotate(X)) <-> member(ordered_pair(ordered_pair(U,V),W),cross_product(cross_product(universal_class,universal_class),universal_class)) & member(ordered_pair(ordered_pair(V,W),U),X))) # label(rotate_defn) # label(axiom).
+(all X subclass(rotate(X),cross_product(cross_product(universal_class,universal_class),universal_class))) # label(rotate) # label(axiom).
+(all U all V all W all X (member(ordered_pair(ordered_pair(U,V),W),flip(X)) <-> member(ordered_pair(ordered_pair(U,V),W),cross_product(cross_product(universal_class,universal_class),universal_class)) & member(ordered_pair(ordered_pair(V,U),W),X))) # label(flip_defn) # label(axiom).
+(all X subclass(flip(X),cross_product(cross_product(universal_class,universal_class),universal_class))) # label(flip) # label(axiom).
+(all X all Y all Z (member(Z,union(X,Y)) <-> member(Z,X) | member(Z,Y))) # label(union_defn) # label(axiom).
+(all X successor(X) = union(X,singleton(X))) # label(successor_defn) # label(axiom).
+subclass(successor_relation,cross_product(universal_class,universal_class)) # label(successor_relation_defn1) # label(axiom).
+(all X all Y (member(ordered_pair(X,Y),successor_relation) <-> member(X,universal_class) & member(Y,universal_class) & successor(X) = Y)) # label(successor_relation_defn2) # label(axiom).
+(all Y inverse(Y) = domain_of(flip(cross_product(Y,universal_class)))) # label(inverse_defn) # label(axiom).
+(all Z range_of(Z) = domain_of(inverse(Z))) # label(range_of_defn) # label(axiom).
+(all X all XR image(XR,X) = range_of(restrict(XR,X,universal_class))) # label(image_defn) # label(axiom).
+(all X (inductive(X) <-> member(null_class,X) & subclass(image(successor_relation,X),X))) # label(inductive_defn) # label(axiom).
+(exists X (member(X,universal_class) & inductive(X) & (all Y (inductive(Y) -> subclass(X,Y))))) # label(infinity) # label(axiom).
+(all U all X (member(U,sum_class(X)) <-> (exists Y (member(U,Y) & member(Y,X))))) # label(sum_class_defn) # label(axiom).
+(all X (member(X,universal_class) -> member(sum_class(X),universal_class))) # label(sum_class) # label(axiom).
+(all U all X (member(U,power_class(X)) <-> member(U,universal_class) & subclass(U,X))) # label(power_class_defn) # label(axiom).
+(all U (member(U,universal_class) -> member(power_class(U),universal_class))) # label(power_class) # label(axiom).
+(all XR all YR subclass(compose(YR,XR),cross_product(universal_class,universal_class))) # label(compose_defn1) # label(axiom).
+(all XR all YR all U all V (member(ordered_pair(U,V),compose(YR,XR)) <-> member(U,universal_class) & member(V,image(YR,image(XR,singleton(U)))))) # label(compose_defn2) # label(axiom).
+(all Z (member(Z,identity_relation) <-> (exists X (member(X,universal_class) & Z = ordered_pair(X,X))))) # label(identity_relation) # label(axiom).
+(all XF (function(XF) <-> subclass(XF,cross_product(universal_class,universal_class)) & subclass(compose(XF,inverse(XF)),identity_relation))) # label(function_defn) # label(axiom).
+(all X all XF (member(X,universal_class) & function(XF) -> member(image(XF,X),universal_class))) # label(replacement) # label(axiom).
+(all X all Y (disjoint(X,Y) <-> (all U -(member(U,X) & member(U,Y))))) # label(disjoint_defn) # label(axiom).
+(all X (X != null_class -> (exists U (member(U,universal_class) & member(U,X) & disjoint(U,X))))) # label(regularity) # label(axiom).
+(all XF all Y apply(XF,Y) = sum_class(image(XF,singleton(Y)))) # label(apply_defn) # label(axiom).
+(exists XF (function(XF) & (all Y (member(Y,universal_class) -> Y = null_class | member(apply(XF,Y),Y))))) # label(choice) # label(axiom).
+end_of_list.
+
+% [1] Art Quaife, “Automated Development of Fundamental Mathematical Theories”, 1992
+% [2] http://www.cs.unm.edu/~mccune/mace4/
