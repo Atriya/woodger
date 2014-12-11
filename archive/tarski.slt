@@ -1,0 +1,170 @@
+
+(:DESCRIPTIONS
+ ((:X
+   204
+   :Y
+   361
+   :ID
+   5
+   :NAME
+   "x is part of x"
+   :FORMULA
+   "(part x x)"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   41
+   :Y
+   25
+   :ID
+   1
+   :NAME
+   "y is the sum of alpha iff every member of alpha is part of y"
+   :FORMULA
+   "(forall (y) (iff (sum y alpha) (forall (x) (if (member x alpha) (part x y)))))"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   913
+   :Y
+   633
+   :ID
+   7
+   :NAME
+   ""
+   :FORMULA
+   "(if (forall (x) (member x alpha)) (forall (x) (part x x)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   716
+   :Y
+   205
+   :ID
+   4
+   :NAME
+   "x is the only sum of alpha"
+   :FORMULA
+   "(and (sum x alpha) (not (exists (y) (and (sum y alpha) (not (= x y))))))"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   874
+   :Y
+   36
+   :ID
+   2
+   :NAME
+   "alpha = {x}"
+   :FORMULA
+   "(forall (x) (exists (alpha) (and (member x alpha) (not (exists (y) (and (member y alpha) (not (= x y))))))))"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   21
+   :Y
+   566
+   :ID
+   11
+   :NAME
+   ""
+   :FORMULA
+   "(exists (y) (and (member x y) (= y alpha)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   0
+   :Y
+   632
+   :ID
+   9
+   :NAME
+   "Existence of a set"
+   :FORMULA
+   "(exists (y) (and (member x y) (= y alpha)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   1001
+   :Y
+   475
+   :ID
+   6
+   :NAME
+   ""
+   :FORMULA
+   "(forall(x) (if (member x alpha) (part x x)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   198
+   :Y
+   179
+   :ID
+   3
+   :NAME
+   "y is the sum of alpha iff x is part of y"
+   :FORMULA
+   "(forall (y) (iff (sum y alpha) (part x y)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   760
+   :Y
+   552
+   :ID
+   12
+   :NAME
+   "NOTE"
+   :FORMULA
+   "(forall (x) (exists (alpha) (member x alpha)))"
+   :JUSTIFICATION
+   LOGIC::ASSUME)
+  (:X
+   438
+   :Y
+   551
+   :ID
+   10
+   :NAME
+   "NOTE"
+   :FORMULA
+   "(forall (z) (iff (member z alpha) (= z x)))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY)
+  (:X
+   647
+   :Y
+   813
+   :ID
+   8
+   :NAME
+   "Goal"
+   :FORMULA
+   "(forall (x) (part x x))"
+   :JUSTIFICATION
+   LOGIC::FOL-PROVABILITY))
+ :STRUCTURES
+ ((:CONCLUSION 5 :PREMISES (4 3))
+  (:CONCLUSION 1 :PREMISES NIL)
+  (:CONCLUSION 7 :PREMISES (6))
+  (:CONCLUSION 4 :PREMISES NIL)
+  (:CONCLUSION 2 :PREMISES NIL)
+  (:CONCLUSION 11 :PREMISES NIL)
+  (:CONCLUSION 9 :PREMISES NIL)
+  (:CONCLUSION 6 :PREMISES (5))
+  (:CONCLUSION 3 :PREMISES (1))
+  (:CONCLUSION 12 :PREMISES NIL)
+  (:CONCLUSION 10 :PREMISES NIL)
+  (:CONCLUSION 8 :PREMISES (10 12 7)))
+ :INTERFACE
+ (:X
+  0
+  :Y
+  0
+  :WIDTH
+  1440
+  :HEIGHT
+  851
+  :PROOF-SYSTEM
+  LOGIC::FIRST-ORDER-LOGIC))
